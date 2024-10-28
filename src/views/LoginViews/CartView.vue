@@ -20,19 +20,23 @@
     </div>
     <div class="order">
       <SummaryOrder />
+      <RecommendationByCart />
     </div>
+    
   </div>
 </template>
 
 <script>
 import CarritoItem from '../../components/CartComponents/CartItem.vue'
 import SummaryOrder from '../../components/CartComponents/SummaryOrder.vue'
+import RecommendationByCart from '../../components/CartComponents/RecommendationByCart.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     CarritoItem,
-    SummaryOrder
+    SummaryOrder,
+    RecommendationByCart
   },
   computed: {
 
