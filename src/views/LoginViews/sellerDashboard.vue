@@ -15,7 +15,9 @@
 
         <main class="content">
             <addStores v-if="view === 'create'" :stores="stores" @update-stores="updateStores" />
-            <manageStores v-if="view === 'manage'" :stores="stores" @update-stores="updateStores" />
+            <manageStores v-if="view === 'manage'" :stores="stores" @update-stores="updateStores" @change-view="view = $event"/>
+            <SellerProduct v-if="view === 'SellerProduct'" @open-create-product="openCreateProductModal" />
+  
         </main>
     </div>
 </template>
@@ -23,17 +25,20 @@
 <script>
 import addStores from "../../components/controlPanelComponents/addStores.vue";
 import manageStores from "../../components/controlPanelComponents/manageStores.vue";
+import SellerProduct from "@/components/MenuComponents/SellerProductlist/SellerProduct.vue";
+
 
 export default {
-    components: { addStores, manageStores },
+    components: { addStores, manageStores, SellerProduct },
     data() {
         return {
             view: "create",
             stores: [],
+            showCreateProductModal: false, // control del modal
         };
     },
     methods: {
-        updateStores(store, deleteStore = false) {// el codigo que esta aqui es solo visual, es decir, todavia no esta funcionando con la base porque eso nos toca en la tercera iteracion
+        updateStores(store, deleteStore = false) {
             if (deleteStore) {
                 this.stores.splice(store, 1); 
             } else {
@@ -42,8 +47,13 @@ export default {
         },
         logout() {
             alert("Cerrando sesión...");
-          
         },
+        openCreateProductModal() {
+            this.showCreateProductModal = true; // Abre el modal
+        },
+        closeCreateProductModal() {
+            this.showCreateProductModal = false; // Cierra el modal
+        }
     },
 };
 </script>

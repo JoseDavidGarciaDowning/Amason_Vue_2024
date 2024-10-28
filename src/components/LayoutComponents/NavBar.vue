@@ -1,10 +1,15 @@
 <template>
   <nav>
     <router-link to="/Menu">
-      <img src="@/assets/Amason_White.svg" alt="Logo" class="logo-img" style="width: 128px; height: auto;">
+      <img
+        src="@/assets/Amason_White.svg"
+        alt="Logo"
+        class="logo-img"
+        style="width: 128px; height: auto"
+      />
     </router-link>
     <div class="search-container">
-      <input type="text" placeholder="Buscar artículo" aria-label="Buscar">
+      <input type="text" placeholder="Buscar artículo" aria-label="Buscar" />
       <button type="button" aria-label="Buscar">
         <i class="fas fa-search" aria-hidden="true"></i>
       </button>
@@ -29,13 +34,18 @@
           <div class="line-2">Carrito</div>
         </router-link>
         <div class="cart-toggle">
-        <PopUpCart />
+          <PopUpCart />
         </div>
+      </li>
+      <li>
+        <a href="#" @click.prevent="logout">
+          <div class="line-1">Cerrar</div>
+          <div class="line-2">sesión</div>
+        </a>
       </li>
     </ul>
 
     <div class="bottom-nav">
-      
       <div class="containerOption">
         <router-link to="/Menu" class="nav-icon" aria-label="Inicio">
           <i class="fas fa-home"></i>
@@ -64,15 +74,21 @@
   </nav>
 </template>
 
-
 <script>
-import PopUpCart from '../CartComponents/PopUpCart.vue';
+import PopUpCart from '../CartComponents/PopUpCart.vue'
+import { logoutUser } from '../../../api/auth'
 
 export default {
   components: {
     PopUpCart
   },
-};
+  methods: {
+    logout() {
+      logoutUser() // Llamada a la función que elimina el token y redirige
+      this.$router.push('/login') // Redirige al login después del logout
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -94,7 +110,6 @@ nav {
   border: none;
   padding: 0;
   cursor: pointer;
-
 }
 
 .search-container {
@@ -149,7 +164,9 @@ nav {
   display: none;
   z-index: 1000;
   border-radius: 8px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   opacity: 0;
   transform: translateY(-10px);
 }

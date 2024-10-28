@@ -52,6 +52,7 @@ export default {
         },
         manageProducts(index) {
             alert(`Gestionando productos de ${this.stores[index].name}`);
+            this.$emit("change-view", "SellerProduct");
             
         },
         generateTopSellingReport(index) {
